@@ -616,9 +616,9 @@ def graphviz_fig():
     digraph G {
         rankdir=LR;
         
-        Tokaido_Shinkansen [label="Tokaido Shinkansen", shape=box, style=filled, color=lightblue];
-        Sanyo_Shinkansen [label="Sanyo Shinkansen", shape=box, style=filled, color="#90EE90"];
-        Tohoku_Shinkansen [label="Tohoku Shinkansen", shape=box, style=filled, color=lightcoral];
+        Tokaido_Shinkansen [label="Tokaido Shinkansen", shape=box, style=filled, color="#c18489"];
+        Sanyo_Shinkansen [label="Sanyo Shinkansen", shape=box, style=filled, color="#87bbe2"];
+        Tohoku_Shinkansen [label="Tohoku Shinkansen", shape=box, style=filled, color="#6298c0"];
         
         Tokyo [label="Tokyo Station", shape=ellipse];
         Shin_Yokohama [label="Shin-Yokohama Station", shape=ellipse];
@@ -639,7 +639,53 @@ def graphviz_fig():
     # Display the graph using st.graphviz_chart
     st.graphviz_chart(graph)
 
-    code = '''st.graphviz_chart(graph)'''
+    st.write("**Function Signature**")
+    code = '''st.graphviz_chart(figure_or_dot, use_container_width=False)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **figure_or_dot**: Object or dot string being plotted
+        - **use_container_width**: Sets width to the entire container width
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = ''''''
+     graph = '''
+    digraph G {
+        rankdir=LR;
+        
+        Tokaido_Shinkansen [label="Tokaido Shinkansen", shape=box, style=filled, color="#c18489"];
+        Sanyo_Shinkansen [label="Sanyo Shinkansen", shape=box, style=filled, color="#87bbe2"];
+        Tohoku_Shinkansen [label="Tohoku Shinkansen", shape=box, style=filled, color="#6298c0"];
+        
+        Tokyo [label="Tokyo Station", shape=ellipse];
+        Shin_Yokohama [label="Shin-Yokohama Station", shape=ellipse];
+        Kyoto [label="Kyoto Station", shape=ellipse];
+        Osaka [label="Osaka Station", shape=ellipse];
+        Sendai [label="Sendai Station", shape=ellipse];
+        
+        Tokaido_Shinkansen -> Tokyo;
+        Tokaido_Shinkansen -> Shin_Yokohama;
+        Tokaido_Shinkansen -> Kyoto;
+        Sanyo_Shinkansen -> Kyoto;
+        Sanyo_Shinkansen -> Osaka;
+        Tohoku_Shinkansen -> Tokyo;
+        Tohoku_Shinkansen -> Sendai;
+    }
+    '''
+
+    # Display the graph using st.graphviz_chart
+    st.graphviz_chart(graph)''''''
     st.code(code, language="python")
 
 styles = {
