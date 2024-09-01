@@ -25,8 +25,10 @@ def area_chart():
     stations_per_year = df.groupby('Year').size()
     st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")
 
-    st.write("**Code**")
-    code = '''st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations")'''
+    st.write("**My Code**")
+    code = '''
+    stations_per_year = df.groupby('Year').size()
+    st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations")'''
     st.code(code, language="python")
 
 def bar_chart():
