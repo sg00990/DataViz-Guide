@@ -1,0 +1,8 @@
+streamlit
+pandas
+streamlit_navigation_bar
+matplotlib
+altair
+plotly
+bokeh
+pydeck
