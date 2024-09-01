@@ -288,22 +288,22 @@ if page == "Simple Charts":
         map()
     else:
         st.subheader("Pros and Cons of Simple Charts")
-        st.write('''*"Simple charts" are just data visualization tool native to Streamlit.*''')
+        st.write('''*"Simple charts" are just data visualization tools native to Streamlit.*''')
         st.markdown(
             """
-            Pros:
-            - **Simplicity**
-            - **Nice Integration**
-            - **Performance**
-            - **Low Learning Curve**
+            **Pros**:
+            - **Simplicity**: Streamlit's native charts are straightforward to use with minimal code. They are ideal for quickly adding visualizations to your app.
+            - **Easy Integration**: These charts are fully integrated with Streamlit, meaning they handle reactivity (e.g., updates when data changes) and layout automatically.
+            - **Performance**: Native charts are optimized for performance within Streamlit, ensuring quick rendering and smooth user experience.
+            - **Low Learning Curve**: For users who are new to data visualization or want to get something on the screen quickly, native Streamlit charts are very accessible.
             """
         )
         st.markdown(
             """
-            Cons:
-            - **Limited Customization**
-            - **Fewer Choices**
-            - **Basic Interactivity**
+            **Cons**:
+            - **Limited Customization**: Native charts lack the advanced customization options available in more powerful libraries. If you need complex formatting or highly specific visual elements, they might not be sufficient.
+            - **Fewer Choices**: The range of chart types and options is more limited compared to external libraries like Plotly or Matplotlib.
+            - **Basic Interactivity**: While Streamlit charts support basic interactivity, they don’t offer the advanced interactive features available in other libraries.
             """
         )
         st.markdown('''
