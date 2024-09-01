@@ -278,16 +278,19 @@ def matplotlib_fig():
     st.code(code, language="python")
 
 def altair_fig():
+    company_counts = df['Company'].value_counts().reset_index()
+    company_counts.columns = ['Company', 'Number of Stations']
+
     # Customize the colors
     custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
-    company_list = df['Company'].unique()
+    company_list = company_counts['Company'].unique()
     color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
     
     # Convert the color map to a scale for Altair
     color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
     
     # Create a bar chart using Altair
-    chart = alt.Chart(df).mark_bar().encode(
+    chart = alt.Chart(company_counts).mark_bar().encode(
         x=alt.X('Company:N', sort='-y', title='Company'),
         y=alt.Y('Number of Stations:Q', title='Number of Stations'),
         color=alt.Color('Company:N', scale=color_scale),
