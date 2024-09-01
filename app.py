@@ -530,6 +530,8 @@ def bokeh_fig():
     year_counts.columns = ['Year', 'Number of Stations']
     year_counts = year_counts.sort_values(by='Year')
 
+    st.write(year_counts)
+
     # Create a Bokeh figure
     p = figure(
         title='Number of Shinkansen Stations Established by Year',
@@ -554,7 +556,7 @@ def bokeh_fig():
     p.yaxis.axis_label_text_font_size = "12pt"
 
     # Display the chart in Streamlit
-    st.bokeh_chart(p, use_container_width=True)
+    #st.bokeh_chart(p, use_container_width=True)
 
     code = '''st.bokeh_chart(fig)'''
     st.code(code, language="python")
