@@ -530,9 +530,6 @@ def bokeh_fig():
     year_counts.columns = ['Year', 'Number of Stations']
     year_counts = year_counts.sort_values(by='Year')
 
-    # Convert the data to a Bokeh ColumnDataSource
-    #source = ColumnDataSource(year_counts)
-
     # Create a Bokeh figure
     p = figure(
         title='Number of Shinkansen Stations Established by Year',
@@ -542,9 +539,12 @@ def bokeh_fig():
         height=400
     )
 
+    x = year_counts['Year']
+    y = year_counts['Number of Stations']
+
     # Add a line and circle glyph
-    p.line(x='Year', y='Number of Stations', source=year_counts, line_width=2, color='blue', legend_label='Stations')
-    p.circle(x='Year', y='Number of Stations', source=year_counts, size=8, color='red', legend_label='Stations')
+    p.line(x=x, y=y, line_width=2, color='blue', legend_label='Stations')
+    p.circle(x=x, y=y, source=source, size=8, color='red', legend_label='Stations')
 
 
     # Customize the chart
