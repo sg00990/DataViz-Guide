@@ -136,9 +136,39 @@ def line_chart():
 
 def scatter_plot():
     st.subheader("*Distance from Tokyo Station*")
-    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)")
+    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Prefecture")
 
-    code = '''st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station")'''
+    st.write("**Function Signature**")
+    code = '''st.scatter_chart(data=None, *, x=None, y=None, x_label=None, y_label=None, color=None, size=None, width=None, height=None, use_container_width=True)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **data**: Data being plotted (in my case, a pandas DataFrame)
+        - **x**: Name of the x column
+        - **y**: Name of the y column
+        - **x_label**: Label for the x-axis
+        - **y_label**: Label for the y-axis
+        - **color**: Customize the color(s) used on the chart
+        - **size**: Size of the circles
+        - **width**: Set the width
+        - **height**: Set the height
+        - **use_container_width**: Overrides the width and sets it to the entire container width
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+    stations_per_prefecture = df['Prefecture'].value_counts()
+    st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#c18489")'''
     st.code(code, language="python")
 
 def map():
