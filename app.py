@@ -23,8 +23,9 @@ df['Latitude'] = pd.to_numeric(df['Latitude'])
 def area_chart():
     st.subheader("*Number of Stations Opened Per Year*")
     stations_per_year = df.groupby('Year').size()
-    st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations")
+    st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")
 
+    st.write("**Code**")
     code = '''st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations")'''
     st.code(code, language="python")
 
@@ -366,6 +367,10 @@ elif page == "Advanced Charts":
             }
             </style>
         ''', unsafe_allow_html=True)
+
+        st.subheader("My Data")
+        st.write("My dataset is a Japanese bullet train (shinkansen) dataset from Kaggle and I used pandas to import/manipulate it.")
+        st.code('''df = pd.read_excel("shinkansen.xlsx")''', language="python")
 
 else:
     st.header("**Shinkansen in Japan 🚅**")
