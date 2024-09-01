@@ -5,6 +5,7 @@ matplotlib
 altair
 plotly
 bokeh==2.4.3
+numpy<=1.21.6
 pillow
 pydeck
 openpyxl
