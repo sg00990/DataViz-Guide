@@ -4,8 +4,6 @@ from streamlit_navigation_bar import st_navbar
 import matplotlib.pyplot as plt
 import altair as alt
 import plotly.express as px
-from bokeh.plotting import figure
-from bokeh.models import HoverTool, ColumnDataSource
 import pydeck as pdk
 
 st.set_page_config(
@@ -526,32 +524,7 @@ def plotly_fig():
     st.code(code, language="python")
 
 def bokeh_fig():
-    # Create year_counts as before
-    year_counts = df['Year'].value_counts().reset_index()
-    year_counts.columns = ['Year', 'Number of Stations']
-    year_counts = year_counts.sort_values(by='Year', ascending=False)
-    
-    # Convert the entire DataFrame to a Bokeh ColumnDataSource
-    source = ColumnDataSource(year_counts)
-    
-    # Create a Bokeh figure
-    p = figure(
-        title='Number of Shinkansen Stations Established by Year',
-        x_axis_label='Year',
-        y_axis_label='Number of Stations',
-        width=800,
-        height=400
-    )
-    
-    # Add a line and circle glyph using the ColumnDataSource
-    p.line(x='Year', y='Number of Stations', source=source, line_width=2, color='blue', legend_label='Number of Stations')
-    p.circle(x='Year', y='Number of Stations', source=source, size=8, color='red', legend_label='Number of Stations')
-    
-    # Display the chart in Streamlit
-    st.bokeh_chart(p, use_container_width=True)
-
-    code = '''st.bokeh_chart(fig)'''
-    st.code(code, language="python")
+    st.write("Working on it...")
 
 def pydeck_fig():
     layer = pdk.Layer(
@@ -561,7 +534,7 @@ def pydeck_fig():
         get_elevation=1000,  # Fixed elevation for all stations, can be modified to use a data field
         elevation_scale=50,
         radius=10000,  # Adjust the radius of the columns
-        get_fill_color='[200, 30, 0, 160]',  # RGBA color format
+        get_fill_color='[98, 152, 192, 255]',   # RGBA color format
         pickable=True,  # Enable picking for interactivity
         auto_highlight=True
     )
@@ -583,8 +556,59 @@ def pydeck_fig():
 
     st.subheader("**3D Map of Shinkansen Stations in Japan**")
     st.pydeck_chart(r)
+    
+    st.write("**Function Signature**")
+    code = '''st.pyplot(fig=None, clear_figure=None, use_container_width=True, **kwargs)'''
+    st.code(code, language="python")
 
-    code = '''st.pydeck_chart(r)'''
+    st.markdown(
+        """
+        **Parameters**:
+        - **fig**: Object being plotted
+        - **clear_figure**: Choose whether or not figure is cleared after being rendered
+        - **use_container_width**: Sets width to the entire container width
+        - **kwargs**: Arguements to pass to the savefig function
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+        layer = pdk.Layer(
+        'ColumnLayer',
+        data=df,
+        get_position='[Longitude, Latitude]',
+        get_elevation=1000,  # Fixed elevation for all stations, can be modified to use a data field
+        elevation_scale=50,
+        radius=10000,  # Adjust the radius of the columns
+        get_fill_color='[98, 152, 192, 255]',   # RGBA color format
+        pickable=True,  # Enable picking for interactivity
+        auto_highlight=True
+    )
+
+    # Set the view of the map
+    view_state = pdk.ViewState(
+        latitude=df['Latitude'].mean(),
+        longitude=df['Longitude'].mean(),
+        zoom=5,
+        pitch=50,  # Tilt the map for a 3D effect
+    )
+
+    # Create the pydeck chart
+    r = pdk.Deck(
+        layers=[layer],
+        initial_view_state=view_state,
+        tooltip={"text": "Station: {Station Name}\nPrefecture: {Prefecture}\nLine: {Shinkansen_Line}"}
+    )
+
+    st.subheader("**3D Map of Shinkansen Stations in Japan**")
+    st.pydeck_chart(r)'''
     st.code(code, language="python")
 
 def graphviz_fig():
@@ -693,10 +717,6 @@ elif page == "Advanced Charts":
     elif choice == "Graphviz":
         graphviz_fig()
     else:
-        p = figure(title="Simple line example", x_axis_label='x', y_axis_label='y')
-        p.line([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], line_width=2)
-        
-        st.bokeh_chart(p, use_container_width=True)
         st.subheader("Pros and Cons of Advanced Charts")
         st.write('''*"Advanced charts" are just data visualization tools from other Python packages/libraries such as Matplotlib or Plotly.*''')
         st.markdown(
