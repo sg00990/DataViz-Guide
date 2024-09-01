@@ -659,7 +659,7 @@ def graphviz_fig():
     ''', unsafe_allow_html=True)
 
     st.write("**My Code**")
-    code = ''''''
+    code = """
      graph = '''
     digraph G {
         rankdir=LR;
@@ -685,7 +685,7 @@ def graphviz_fig():
     '''
 
     # Display the graph using st.graphviz_chart
-    st.graphviz_chart(graph)''''''
+    st.graphviz_chart(graph)"""
     st.code(code, language="python")
 
 styles = {
