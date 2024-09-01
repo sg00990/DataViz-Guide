@@ -544,14 +544,7 @@ def bokeh_fig():
 
     # Add a line and circle glyph
     p.line(x, y, line_width=2, color='blue', legend_label='Number of Stations')
-    p.circle(x, y, size=8, color='red', legend_label='Number of Stations')
-
-
-    # Customize the chart
-    p.legend.location = "top_left"
-    p.title.text_font_size = "16pt"
-    p.xaxis.axis_label_text_font_size = "12pt"
-    p.yaxis.axis_label_text_font_size = "12pt"
+    #p.circle(x, y, size=8, color='red', legend_label='Number of Stations')
 
     # Display the chart in Streamlit
     st.bokeh_chart(p, use_container_width=True)
