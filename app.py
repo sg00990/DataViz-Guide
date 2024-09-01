@@ -432,9 +432,13 @@ def vega_fig():
     st.code(code, language="python")
 
 def plotly_fig():
-    prefecture_counts = df['Prefecture'].value_counts().reset_index()
-    prefecture_counts.columns = ['Prefecture', 'Number of Stations']
-
+    # Customize the colors
+    custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+    
+    # Map each prefecture to a custom color
+    prefecture_list = prefecture_counts['Prefecture'].unique()
+    color_map = {prefecture: custom_colors[i % len(custom_colors)] for i, prefecture in enumerate(prefecture_list)}
+    
     # Create a bar chart using Plotly
     fig = px.bar(
         prefecture_counts,
@@ -443,7 +447,8 @@ def plotly_fig():
         color='Prefecture',
         title='Number of Shinkansen Stations by Prefecture',
         labels={'Prefecture': 'Prefecture', 'Number of Stations': 'Number of Stations'},
-        height=600
+        height=600,
+        color_discrete_map=color_map  # Apply the custom colors
     )
 
     # Customize the layout for better readability
@@ -456,7 +461,54 @@ def plotly_fig():
     # Display the chart in Streamlit
     st.plotly_chart(fig, use_container_width=True)
 
-    code = '''st.plotly_chart(fig)'''
+    st.write("**Function Signature**")
+    code = '''st.plotly_chart(figure_or_data, use_container_width=False, *, theme="streamlit", key=None, on_select="ignore", selection_mode=('points', 'box', 'lasso'), **kwargs)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **figure_or_data**: Object or data being plotted
+        - **use_container_width**: Sets width to the entire container width
+        - **theme**: Choose the theme of the chart
+        - **key**: Gives the chart a unique identity
+        - **on_select**: Determines how the chart behaves with user interaction
+        - **selection_mode**: Determine selection mode
+        - **kwargs**: Arguements to pass to the savefig function
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+    avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
+    avg_distance_per_year.columns = ['Year', 'Average Distance']
+
+    # Create a line chart using Vega-Lite
+    chart = {
+        "data": {
+            "values": avg_distance_per_year.to_dict(orient="records")
+        },
+        "mark": {
+            "type":"line",
+            "color": "#c18489"
+        },
+        "encoding": {
+            "x": {"field": "Year", "type": "temporal", "title": "Year"},
+            "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
+            "tooltip": [{"field": "Year", "type": "temporal"}, {"field": "Average Distance", "type": "quantitative"}]
+        },
+        "title": "Average Distance from Tokyo Station by Year"
+    }
+
+    # Display the chart in Streamlit
+    st.vega_lite_chart(chart, use_container_width=True)'''
     st.code(code, language="python")
 
 def bokeh_fig():
