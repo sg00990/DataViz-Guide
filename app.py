@@ -235,7 +235,7 @@ def matplotlib_fig():
     st.markdown(
         """
         **Parameters**:
-        - **fig**: Data being plotted (in my case, a pandas DataFrame)
+        - **fig**: Object to display
         - **clear_figure**: Customize the color(s) used on the chart
         - **use_container_width**: Sets width to the entire container width
         - **kwargs**: Arguements to pass to the savefig function
@@ -251,6 +251,7 @@ def matplotlib_fig():
 
     st.write("**My Code**")
     code = '''
+        # Customize the colors
         custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
         shinkansen_lines = df['Shinkansen_Line'].unique()
         color_map = {line: custom_colors[i % len(custom_colors)] for i, line in enumerate(shinkansen_lines)}
@@ -277,14 +278,19 @@ def matplotlib_fig():
     st.code(code, language="python")
 
 def altair_fig():
-    company_counts = df['Company'].value_counts().reset_index()
-    company_counts.columns = ['Company', 'Number of Stations']
-
+    # Customize the colors
+    custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+    company_list = company_counts['Company'].unique()
+    color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
+    
+    # Convert the color map to a scale for Altair
+    color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
+    
     # Create a bar chart using Altair
     chart = alt.Chart(company_counts).mark_bar().encode(
         x=alt.X('Company:N', sort='-y', title='Company'),
         y=alt.Y('Number of Stations:Q', title='Number of Stations'),
-        color='Company:N',
+        color=alt.Color('Company:N', scale=color_scale),
         tooltip=['Company:N', 'Number of Stations:Q']
     ).properties(
         title='Number of Shinkansen Stations by Company',
@@ -292,9 +298,56 @@ def altair_fig():
         height=400
     )
 
+    # Display the chart in Streamlit
     st.altair_chart(chart)
 
-    code = '''st.altair_chart(chart)'''
+    st.write("**Function Signature**")
+    code = '''st.altair_chart(altair_chart, *, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **altair_chart**: Object to display
+        - **use_container_width**: Sets width to the entire container width
+        - **theme**: Choose the theme of the chart
+        - **key**: Gives the chart a unique identity
+        - **on_select**: Determines how the chart behaves with user interaction
+        - **selection_mode**: Determine selection parameters
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+        # Customize the colors
+        custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+        company_list = company_counts['Company'].unique()
+        color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
+        
+        # Convert the color map to a scale for Altair
+        color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
+        
+        # Create a bar chart using Altair
+        chart = alt.Chart(company_counts).mark_bar().encode(
+            x=alt.X('Company:N', sort='-y', title='Company'),
+            y=alt.Y('Number of Stations:Q', title='Number of Stations'),
+            color=alt.Color('Company:N', scale=color_scale),
+            tooltip=['Company:N', 'Number of Stations:Q']
+        ).properties(
+            title='Number of Shinkansen Stations by Company',
+            width=600,
+            height=400
+        )
+    
+        # Display the chart in Streamlit
+        st.altair_chart(chart)'''
     st.code(code, language="python")
 
 def vega_fig():
