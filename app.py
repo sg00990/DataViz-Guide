@@ -136,7 +136,7 @@ def line_chart():
 
 def scatter_plot():
     st.subheader("*Distance from Tokyo Station*")
-    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Company")
+    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Company", color="#c7daed")
 
     st.write("**Function Signature**")
     code = '''st.scatter_chart(data=None, *, x=None, y=None, x_label=None, y_label=None, color=None, size=None, width=None, height=None, use_container_width=True)'''
@@ -167,16 +167,42 @@ def scatter_plot():
 
     st.write("**My Code**")
     code = '''
-    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Company")'''
+    st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Company", color="#c7daed")'''
     st.code(code, language="python")
 
 def map():
     st.subheader("*Shinkansen Stations in Japan*")
     st.map(df, longitude="Longitude", latitude="Latitude")
 
-    code = '''st.map(df, longitude="Longitude", latitude="Latitude")'''
+    st.write("**Function Signature**")
+    code = '''st.map(data=None, *, latitude=None, longitude=None, color=None, size=None, zoom=None, use_container_width=True)'''
     st.code(code, language="python")
 
+    st.markdown(
+        """
+        **Parameters**:
+        - **data**: Data being plotted (in my case, a pandas DataFrame)
+        - **longitude**: Name of the longitude column
+        - **latitude**: Name of the latitude column
+        - **color**: Customize the color(s) used on the chart
+        - **size**: Size of the circles
+        - **zoom**: Choose zoom level
+        - **use_container_width**: Sets width to the entire container width
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+    st.map(df, longitude="Longitude", latitude="Latitude")'''
+    st.code(code, language="python")
+    
 def matplotlib_fig():
     shinkansen_lines = df['Shinkansen_Line'].unique()
     colors = plt.get_cmap('tab10', len(shinkansen_lines))
