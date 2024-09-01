@@ -328,32 +328,32 @@ def altair_fig():
     ''', unsafe_allow_html=True)
 
     st.write("**My Code**")
-        code = '''
-        company_counts = df['Company'].value_counts().reset_index()
-        company_counts.columns = ['Company', 'Number of Stations']
+    code = '''
+    company_counts = df['Company'].value_counts().reset_index()
+    company_counts.columns = ['Company', 'Number of Stations']
+
+    # Customize the colors
+    custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+    company_list = company_counts['Company'].unique()
+    color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
     
-        # Customize the colors
-        custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
-        company_list = company_counts['Company'].unique()
-        color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
-        
-        # Convert the color map to a scale for Altair
-        color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
-        
-        # Create a bar chart using Altair
-        chart = alt.Chart(company_counts).mark_bar().encode(
-            x=alt.X('Company:N', sort='-y', title='Company'),
-            y=alt.Y('Number of Stations:Q', title='Number of Stations'),
-            color=alt.Color('Company:N', scale=color_scale),
-            tooltip=['Company:N', 'Number of Stations:Q']
-        ).properties(
-            title='Number of Shinkansen Stations by Company',
-            width=600,
-            height=400
-        )
+    # Convert the color map to a scale for Altair
+    color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
     
-        # Display the chart in Streamlit
-        st.altair_chart(chart)'''
+    # Create a bar chart using Altair
+    chart = alt.Chart(company_counts).mark_bar().encode(
+        x=alt.X('Company:N', sort='-y', title='Company'),
+        y=alt.Y('Number of Stations:Q', title='Number of Stations'),
+        color=alt.Color('Company:N', scale=color_scale),
+        tooltip=['Company:N', 'Number of Stations:Q']
+    ).properties(
+        title='Number of Shinkansen Stations by Company',
+        width=600,
+        height=400
+    )
+
+    # Display the chart in Streamlit
+    st.altair_chart(chart)'''
     st.code(code, language="python")
 
 def vega_fig():
@@ -407,28 +407,28 @@ def vega_fig():
 
     st.write("**My Code**")
     code = '''
-        avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
-        avg_distance_per_year.columns = ['Year', 'Average Distance']
-    
-        # Create a line chart using Vega-Lite
-        chart = {
-            "data": {
-                "values": avg_distance_per_year.to_dict(orient="records")
-            },
-            "mark": {
-                "type":"line",
-                "color": "#c18489'"
-            }
-            "encoding": {
-                "x": {"field": "Year", "type": "temporal", "title": "Year"},
-                "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
-                "tooltip": [{"field": "Year", "type": "temporal"}, {"field": "Average Distance", "type": "quantitative"}]
-            },
-            "title": "Average Distance from Tokyo Station by Year"
+    avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
+    avg_distance_per_year.columns = ['Year', 'Average Distance']
+
+    # Create a line chart using Vega-Lite
+    chart = {
+        "data": {
+            "values": avg_distance_per_year.to_dict(orient="records")
+        },
+        "mark": {
+            "type":"line",
+            "color": "#c18489'"
         }
-    
-        # Display the chart in Streamlit
-        st.vega_lite_chart(chart, use_container_width=True)'''
+        "encoding": {
+            "x": {"field": "Year", "type": "temporal", "title": "Year"},
+            "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
+            "tooltip": [{"field": "Year", "type": "temporal"}, {"field": "Average Distance", "type": "quantitative"}]
+        },
+        "title": "Average Distance from Tokyo Station by Year"
+    }
+
+    # Display the chart in Streamlit
+    st.vega_lite_chart(chart, use_container_width=True)'''
     st.code(code, language="python")
 
 def plotly_fig():
