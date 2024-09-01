@@ -368,7 +368,7 @@ def vega_fig():
         "mark": {
             "type":"line",
             "color": "#c18489'"
-        }
+        },
         "encoding": {
             "x": {"field": "Year", "type": "temporal", "title": "Year"},
             "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
