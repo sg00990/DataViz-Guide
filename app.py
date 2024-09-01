@@ -288,7 +288,7 @@ if page == "Simple Charts":
         map()
     else:
         st.subheader("Pros and Cons of Simple Charts")
-        st.write('''*"Simple charts" are just data visualization tool native to Streamlit.''')
+        st.write('''*"Simple charts" are just data visualization tool native to Streamlit.*''')
         st.markdown(
             """
             Pros:
@@ -296,12 +296,23 @@ if page == "Simple Charts":
             - **Nice Integration**
             - **Performance**
             - **Low Learning Curve**
+            """
+        )
+        st.markdown(
+            """
             Cons:
             - **Limited Customization**
             - **Fewer Choices**
             - **Basic Interactivity**
             """
         )
+        st.markdown('''
+            <style>
+            [data-testid="stMarkdownContainer"] ul{
+                padding-left:40px;
+            }
+            </style>
+        ''', unsafe_allow_html=True)
 
 elif page == "Advanced Charts":
     st.header('Streamlit Data Viz Guide')
