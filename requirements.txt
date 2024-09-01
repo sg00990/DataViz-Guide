@@ -9,3 +9,4 @@ numpy<=1.21.6
 pillow
 pydeck
 openpyxl
+distutils
