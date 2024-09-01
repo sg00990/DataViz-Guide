@@ -265,7 +265,7 @@ def graphviz_fig():
 
 styles = {
     "nav": {
-        "background-color": "rgb(170, 156, 156)",
+        "background-color": "rgb(227, 168, 179)",
     }
 }
 
@@ -288,6 +288,20 @@ if page == "Simple Charts":
         map()
     else:
         st.subheader("Pros and Cons of Simple Charts")
+        st.write('''*"Simple charts" are just data visualization tool native to Streamlit.''')
+        st.markdown(
+            """
+            Pros:
+            - **Simplicity**
+            - **Nice Integration**
+            - **Performance**
+            - **Low Learning Curve**
+            Cons:
+            - **Limited Customization**
+            - **Fewer Choices**
+            - **Basic Interactivity**
+            """
+        )
 
 elif page == "Advanced Charts":
     st.header('Streamlit Data Viz Guide')
