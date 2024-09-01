@@ -275,6 +275,8 @@ def matplotlib_fig():
         st.pyplot(plt)'''
     st.code(code, language="python")
 
+    st.write('''To learn more, visit the documentation: https://matplotlib.org/stable/index.html''')
+
 def altair_fig():
     company_counts = df['Company'].value_counts().reset_index()
     company_counts.columns = ['Company', 'Number of Stations']
@@ -354,6 +356,8 @@ def altair_fig():
     st.altair_chart(chart)'''
     st.code(code, language="python")
 
+    st.write('''To learn more, visit the documentation: https://altair-viz.github.io''')
+
 def vega_fig():
     avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
     avg_distance_per_year.columns = ['Year', 'Average Distance']
@@ -428,6 +432,8 @@ def vega_fig():
     # Display the chart in Streamlit
     st.vega_lite_chart(chart, use_container_width=True)'''
     st.code(code, language="python")
+
+    st.write('''To learn more, visit the documentation: https://vega.github.io/vega-lite/docs/''')
 
 def plotly_fig():
     # Customize the colors
@@ -523,6 +529,8 @@ def plotly_fig():
     st.plotly_chart(fig, use_container_width=True)'''
     st.code(code, language="python")
 
+    st.write('''To learn more, visit the documentation: https://plotly.com/python/''')
+
 def bokeh_fig():
     st.write("Working on it...")
 
@@ -611,6 +619,8 @@ def pydeck_fig():
     st.pydeck_chart(r)'''
     st.code(code, language="python")
 
+    st.write('''To learn more, visit the documentation: https://deckgl.readthedocs.io/en/latest/''')
+
 def graphviz_fig():
     graph = '''
     digraph G {
@@ -687,6 +697,8 @@ def graphviz_fig():
     # Display the graph using st.graphviz_chart
     st.graphviz_chart(graph)"""
     st.code(code, language="python")
+
+    st.write('''To learn more, visit the documentation: https://graphviz.org/documentation/''')
 
 styles = {
     "nav": {
