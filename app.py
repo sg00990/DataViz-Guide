@@ -25,6 +25,33 @@ def area_chart():
     stations_per_year = df.groupby('Year').size()
     st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")
 
+    st.write("**Function Signature**")
+    code = '''st.area_chart(data=None, *, x=None, y=None, x_label=None, y_label=None, color=None, stack=None, width=None, height=None, use_container_width=True)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **data**: Data being plotted (in my case, a pandas DataFrame)
+        - **x**: Name of the x column
+        - **y**: Name of the y column
+        - **x_label**: Label for the x-axis
+        - **y_label**: Label for the y-axis
+        - **color**: Customize the color(s) used on the chart
+        - **stack**: Choose whether or not to stack the areas
+        - **width**: Set the width
+        - **height**: Set the height
+        - **use_container_width**: Overrides the width and sets it to the entire container width
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
     st.write("**My Code**")
     code = '''
     stations_per_year = df.groupby('Year').size()
