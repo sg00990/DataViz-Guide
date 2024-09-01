@@ -544,7 +544,7 @@ def bokeh_fig():
 
     # Add a line and circle glyph
     p.line(x=x, y=y, line_width=2, color='blue', legend_label='Stations')
-    p.circle(x=x, y=y, source=source, size=8, color='red', legend_label='Stations')
+    p.circle(x=x, y=y, size=8, color='red', legend_label='Stations')
 
 
     # Customize the chart
