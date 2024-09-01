@@ -530,8 +530,8 @@ def bokeh_fig():
     year_counts.columns = ['Year', 'Number of Stations']
     year_counts = year_counts.sort_values(by='Year', ascending=False)
 
-    x = year_counts['Year']
-    y = year_counts['Number of Stations']
+    x = ColumnDataSource(year_counts['Year'])
+    y = ColumnDataSource(year_counts['Number of Stations'])
 
     # Create a Bokeh figure
     p = figure(
@@ -544,7 +544,7 @@ def bokeh_fig():
 
     # Add a line and circle glyph
     p.line(x, y, line_width=2, color='blue', legend_label='Number of Stations')
-    #p.circle(x, y, size=8, color='red', legend_label='Number of Stations')
+    p.circle(x, y, size=8, color='red', legend_label='Number of Stations')
 
     # Display the chart in Streamlit
     st.bokeh_chart(p, use_container_width=True)
