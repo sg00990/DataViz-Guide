@@ -406,7 +406,7 @@ def vega_fig():
     ''', unsafe_allow_html=True)
 
     st.write("**My Code**")
-        code = '''
+    code = '''
         avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
         avg_distance_per_year.columns = ['Year', 'Average Distance']
     
