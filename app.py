@@ -172,7 +172,7 @@ def scatter_plot():
 
 def map():
     st.subheader("*Shinkansen Stations in Japan*")
-    st.map(df, longitude="Longitude", latitude="Latitude")
+    st.map(df, longitude="Longitude", latitude="Latitude", color="Shinkansen_Line")
 
     st.write("**Function Signature**")
     code = '''st.map(data=None, *, latitude=None, longitude=None, color=None, size=None, zoom=None, use_container_width=True)'''
@@ -200,7 +200,7 @@ def map():
 
     st.write("**My Code**")
     code = '''
-    st.map(df, longitude="Longitude", latitude="Latitude")'''
+    st.map(df, longitude="Longitude", latitude="Latitude", color="Shinkansen_Line")'''
     st.code(code, language="python")
     
 def matplotlib_fig():
