@@ -434,6 +434,10 @@ def vega_fig():
 def plotly_fig():
     # Customize the colors
     custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+
+    prefecture_counts = df['Prefecture'].value_counts().reset_index()
+    prefecture_counts.columns = ['Prefecture', 'Number of Stations']
+
     
     # Map each prefecture to a custom color
     prefecture_list = prefecture_counts['Prefecture'].unique()
