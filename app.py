@@ -529,6 +529,7 @@ def bokeh_fig():
     year_counts = df['Year'].value_counts().reset_index()
     year_counts.columns = ['Year', 'Number of Stations']
     year_counts = year_counts.sort_values(by='Year', ascending=False)
+    year_counts = pd.DataFrame(year_counts)
 
     x = ColumnDataSource(year_counts['Year'])
     y = ColumnDataSource(year_counts['Number of Stations'])
