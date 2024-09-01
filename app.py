@@ -526,28 +526,9 @@ def plotly_fig():
     st.code(code, language="python")
 
 def bokeh_fig():
-    # Create year_counts as before
-    year_counts = df['Year'].value_counts().reset_index()
-    year_counts.columns = ['Year', 'Number of Stations']
-    year_counts = year_counts.sort_values(by='Year', ascending=False)
+    p = figure(title="Simple line example", x_axis_label='x', y_axis_label='y')
+    p.line([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], line_width=2)
     
-    # Convert the entire DataFrame to a Bokeh ColumnDataSource
-    source = ColumnDataSource(year_counts)
-    
-    # Create a Bokeh figure
-    p = figure(
-        title='Number of Shinkansen Stations Established by Year',
-        x_axis_label='Year',
-        y_axis_label='Number of Stations',
-        width=800,
-        height=400
-    )
-    
-    # Add a line and circle glyph using the ColumnDataSource
-    p.line(x='Year', y='Number of Stations', source=source, line_width=2, color='blue', legend_label='Number of Stations')
-    p.circle(x='Year', y='Number of Stations', source=source, size=8, color='red', legend_label='Number of Stations')
-    
-    # Display the chart in Streamlit
     st.bokeh_chart(p, use_container_width=True)
 
     code = '''st.bokeh_chart(fig)'''
