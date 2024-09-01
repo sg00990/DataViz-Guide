@@ -204,8 +204,10 @@ def map():
     st.code(code, language="python")
     
 def matplotlib_fig():
+    custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
     shinkansen_lines = df['Shinkansen_Line'].unique()
-    colors = plt.get_cmap('tab10', len(shinkansen_lines))
+    color_map = {line: custom_colors[i % len(custom_colors)] for i, line in enumerate(shinkansen_lines)}
+
 
     # Create a scatter plot
     plt.figure(figsize=(6, 4))
@@ -215,7 +217,7 @@ def matplotlib_fig():
             subset['Longitude'], subset['Latitude'], 
             alpha=0.7, label=line, 
             edgecolors='w', s=30, 
-            c=[colors(list(shinkansen_lines).index(line))]
+            c=color_map[line]
         )
 
     plt.title('Shinkansen Stations in Japan')
@@ -226,7 +228,30 @@ def matplotlib_fig():
     # Display the plot in Streamlit
     st.pyplot(plt)
 
-    code = '''st.pyplot(fig)'''
+    st.write("**Function Signature**")
+    code = '''st.pyplot(fig=None, clear_figure=None, use_container_width=True, **kwargs)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **fig**: Data being plotted (in my case, a pandas DataFrame)
+        - **clear_figure**: Customize the color(s) used on the chart
+        - **use_container_width**: Sets width to the entire container width
+        - **kwargs**: Arguements to pass to the savefig function
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+    code = '''
+    st.map(df, longitude="Longitude", latitude="Latitude", color="#87bbe2")'''
     st.code(code, language="python")
 
 def altair_fig():
