@@ -328,17 +328,20 @@ def altair_fig():
     ''', unsafe_allow_html=True)
 
     st.write("**My Code**")
-    code = '''
+        code = '''
+        company_counts = df['Company'].value_counts().reset_index()
+        company_counts.columns = ['Company', 'Number of Stations']
+    
         # Customize the colors
         custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
-        company_list = df['Company'].unique()
+        company_list = company_counts['Company'].unique()
         color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
         
         # Convert the color map to a scale for Altair
         color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
         
         # Create a bar chart using Altair
-        chart = alt.Chart(df).mark_bar().encode(
+        chart = alt.Chart(company_counts).mark_bar().encode(
             x=alt.X('Company:N', sort='-y', title='Company'),
             y=alt.Y('Number of Stations:Q', title='Number of Stations'),
             color=alt.Color('Company:N', scale=color_scale),
@@ -362,7 +365,10 @@ def vega_fig():
         "data": {
             "values": avg_distance_per_year.to_dict(orient="records")
         },
-        "mark": "line",
+        "mark": {
+            "type":"line",
+            "color": "#c18489'"
+        }
         "encoding": {
             "x": {"field": "Year", "type": "temporal", "title": "Year"},
             "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
@@ -374,7 +380,55 @@ def vega_fig():
     # Display the chart in Streamlit
     st.vega_lite_chart(chart, use_container_width=True)
 
-    code = '''st.vega_lite_chart(chart)'''
+    st.write("**Function Signature**")
+    code = '''st.vega_lite_chart(data=None, spec=None, *, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None, **kwargs)'''
+    st.code(code, language="python")
+
+    st.markdown(
+        """
+        **Parameters**:
+        - **data**: Data being plotted
+        - **spec**: Vega-Lite spec for the chart
+        - **use_container_width**: Sets width to the entire container width
+        - **theme**: Choose the theme of the chart
+        - **key**: Gives the chart a unique identity
+        - **on_select**: Determines how the chart behaves with user interaction
+        - **selection_mode**: Determine selection parameters
+        - **kwargs**: Arguements to pass to the savefig function
+        """
+    )
+    st.markdown('''
+        <style>
+        [data-testid="stMarkdownContainer"] ul{
+            padding-left:40px;
+        }
+        </style>
+    ''', unsafe_allow_html=True)
+
+    st.write("**My Code**")
+        code = '''
+        avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
+        avg_distance_per_year.columns = ['Year', 'Average Distance']
+    
+        # Create a line chart using Vega-Lite
+        chart = {
+            "data": {
+                "values": avg_distance_per_year.to_dict(orient="records")
+            },
+            "mark": {
+                "type":"line",
+                "color": "#c18489'"
+            }
+            "encoding": {
+                "x": {"field": "Year", "type": "temporal", "title": "Year"},
+                "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
+                "tooltip": [{"field": "Year", "type": "temporal"}, {"field": "Average Distance", "type": "quantitative"}]
+            },
+            "title": "Average Distance from Tokyo Station by Year"
+        }
+    
+        # Display the chart in Streamlit
+        st.vega_lite_chart(chart, use_container_width=True)'''
     st.code(code, language="python")
 
 def plotly_fig():
