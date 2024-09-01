@@ -554,7 +554,7 @@ def bokeh_fig():
     p.yaxis.axis_label_text_font_size = "12pt"
 
     # Display the chart in Streamlit
-    #st.bokeh_chart(p, use_container_width=True)
+    st.bokeh_chart(p, use_container_width=True)
 
     code = '''st.bokeh_chart(fig)'''
     st.code(code, language="python")
