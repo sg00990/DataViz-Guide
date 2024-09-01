@@ -335,6 +335,33 @@ elif page == "Advanced Charts":
         graphviz_fig()
     else:
         st.subheader("Pros and Cons of Advanced Charts")
+        st.write('''*"Advanced charts" are just data visualization tools from other Python packages/libraries such as Matplotlib or Plotly.*''')
+        st.markdown(
+            """
+            **Pros**:
+            - **Many Customization Options**: These libraries offer extensive customization options for every aspect of your charts, including styling, labeling, and layout.
+            - **Wide Variety of Chart Types**: Libraries like Plotly and Matplotlib provide a broad range of chart types, from basic to highly specialized visualizations.
+            - **Advanced Interactivity**: Some tools offer robust interactive features like hover effects, zooming, and clicking, making them ideal for complex, interactive dashboards.
+            - **Publication-Ready Quality**: These tools can produce publication-quality figures, which is important for professional presentations or reports.
+            - **Community Support and Extensions**: Being widely used in the data science community, these libraries have extensive documentation, community support, and numerous plugins/extensions.
+            """
+        )
+        st.markdown(
+            """
+            **Cons**:
+            - **Steeper Learning Curve**: These tools require more effort to learn and use effectively, especially for complex customizations.
+            - **Additional Dependencies**: Using these libraries requires installing additional packages, which might add to your app's dependencies.
+            - **Potential Performance Overhead**: Advanced libraries, particularly with complex or interactive charts, can introduce performance overhead, which might slow down your app, especially with large datasets.
+            - **Integration Complexity**: You might need to handle some integration aspects manually, such as ensuring reactivity or properly managing layout within your Streamlit app.
+            """
+        )
+        st.markdown('''
+            <style>
+            [data-testid="stMarkdownContainer"] ul{
+                padding-left:40px;
+            }
+            </style>
+        ''', unsafe_allow_html=True)
 
 else:
     st.header("**Shinkansen in Japan 🚅**")
