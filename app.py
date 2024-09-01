@@ -314,6 +314,10 @@ if page == "Simple Charts":
             </style>
         ''', unsafe_allow_html=True)
 
+        st.subheader("My Data")
+        st.write("My dataset is a Japanese bullet train (shinkansen) dataset from Kaggle and I used pandas to import/manipulate it.")
+        st.code('''df = pd.read_excel("shinkansen.xlsx")''', language="python")
+
 elif page == "Advanced Charts":
     st.header('Streamlit Data Viz Guide')
     choice = st.selectbox('Choose a chart type', options=['Matplotlib', 'Altair', 'Vega Lite', 'Plotly', 'Bokeh', 'Pydeck', 'Graphviz'], index=None, key=2)
