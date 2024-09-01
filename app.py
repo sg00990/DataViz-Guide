@@ -52,7 +52,10 @@ def area_chart():
 
     st.write("**My Code**")
     code = '''
+    # Group the number of station by year
     stations_per_year = df.groupby('Year').size()
+
+    # Display Streamlit chart
     st.area_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")'''
     st.code(code, language="python")
 
@@ -91,7 +94,10 @@ def bar_chart():
 
     st.write("**My Code**")
     code = '''
+    # Count number of stations per prefecture
     stations_per_prefecture = df['Prefecture'].value_counts()
+
+    # Display Streamlit chart
     st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#c18489")'''
     st.code(code, language="python")
 
@@ -128,7 +134,10 @@ def line_chart():
 
     st.write("**My Code**")
     code = '''
+    # Group the number of station by year
     stations_per_year = df.groupby('Year').size()
+
+    # Display Streamlit chart
     st.line_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")'''
     st.code(code, language="python")
 
@@ -165,6 +174,7 @@ def scatter_plot():
 
     st.write("**My Code**")
     code = '''
+    # Display Streamlit chart
     st.scatter_chart(df, x="Station Name", y="Distance from Tokyo Station", x_label="Station Name", y_label="Distance from Tokyo Station (km)", size="Company", color="#c7daed")'''
     st.code(code, language="python")
 
@@ -198,6 +208,7 @@ def map():
 
     st.write("**My Code**")
     code = '''
+    # Display Streamlit map
     st.map(df, longitude="Longitude", latitude="Latitude", color="#87bbe2")'''
     st.code(code, language="python")
     
@@ -329,6 +340,7 @@ def altair_fig():
 
     st.write("**My Code**")
     code = '''
+    # Get number of stations per company
     company_counts = df['Company'].value_counts().reset_index()
     company_counts.columns = ['Company', 'Number of Stations']
 
@@ -337,7 +349,7 @@ def altair_fig():
     company_list = company_counts['Company'].unique()
     color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
     
-    # Convert the color map to a scale for Altair
+    # Convert the color map to a scale
     color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
     
     # Create a bar chart using Altair
@@ -409,6 +421,7 @@ def vega_fig():
 
     st.write("**My Code**")
     code = '''
+    # Get average distance from Tokyo Station per year
     avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
     avg_distance_per_year.columns = ['Year', 'Average Distance']
 
@@ -498,11 +511,12 @@ def plotly_fig():
     # Customize the colors
     custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
 
+    # Get number of stations per prefecture
     prefecture_counts = df['Prefecture'].value_counts().reset_index()
     prefecture_counts.columns = ['Prefecture', 'Number of Stations']
 
     
-    # Map each prefecture to a custom color
+    # Map each prefecture to a olor
     prefecture_list = prefecture_counts['Prefecture'].unique()
     color_map = {prefecture: custom_colors[i % len(custom_colors)] for i, prefecture in enumerate(prefecture_list)}
     
@@ -518,7 +532,7 @@ def plotly_fig():
         color_discrete_map=color_map  # Apply the custom colors
     )
 
-    # Customize the layout for better readability
+    # Customize the layout
     fig.update_layout(
         xaxis_title='Prefecture',
         yaxis_title='Number of Stations',
@@ -592,11 +606,11 @@ def pydeck_fig():
         'ColumnLayer',
         data=df,
         get_position='[Longitude, Latitude]',
-        get_elevation=1000,  # Fixed elevation for all stations, can be modified to use a data field
+        get_elevation=1000,  
         elevation_scale=50,
-        radius=10000,  # Adjust the radius of the columns
-        get_fill_color='[98, 152, 192, 255]',   # RGBA color format
-        pickable=True,  # Enable picking for interactivity
+        radius=10000,  
+        get_fill_color='[98, 152, 192, 255]',  
+        pickable=True,  
         auto_highlight=True
     )
 
@@ -605,7 +619,7 @@ def pydeck_fig():
         latitude=df['Latitude'].mean(),
         longitude=df['Longitude'].mean(),
         zoom=5,
-        pitch=50,  # Tilt the map for a 3D effect
+        pitch=50, 
     )
 
     # Create the pydeck chart
@@ -615,7 +629,10 @@ def pydeck_fig():
         tooltip={"text": "Station: {Station Name}\nPrefecture: {Prefecture}\nLine: {Shinkansen_Line}"}
     )
 
+    # Display chart title
     st.subheader("**3D Map of Shinkansen Stations in Japan**")
+
+    # Display the chart in Streamlit
     st.pydeck_chart(r)'''
     st.code(code, language="python")
 
@@ -694,7 +711,7 @@ def graphviz_fig():
     }
     '''
 
-    # Display the graph using st.graphviz_chart
+    # Display the graph in Streamlit
     st.graphviz_chart(graph)"""
     st.code(code, language="python")
 
