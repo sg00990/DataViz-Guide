@@ -528,9 +528,10 @@ def plotly_fig():
 def bokeh_fig():
     year_counts = df['Year'].value_counts().reset_index()
     year_counts.columns = ['Year', 'Number of Stations']
-    year_counts = year_counts.sort_values(by='Year')
+    year_counts = year_counts.sort_values(by='Year', ascending=False)
 
-    st.write(year_counts)
+    x = year_counts['Year']
+    y = year_counts['Number of Stations']
 
     # Create a Bokeh figure
     p = figure(
@@ -541,12 +542,9 @@ def bokeh_fig():
         height=400
     )
 
-    x = year_counts['Year']
-    y = year_counts['Number of Stations']
-
     # Add a line and circle glyph
-    p.line(x=x, y=y, line_width=2, color='blue', legend_label='Stations')
-    p.circle(x=x, y=y, size=8, color='red', legend_label='Stations')
+    p.line(x, y, line_width=2, color='blue', legend_label='Number of Stations')
+    p.circle(x, y, size=8, color='red', legend_label='Number of Stations')
 
 
     # Customize the chart
