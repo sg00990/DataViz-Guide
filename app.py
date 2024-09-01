@@ -491,28 +491,38 @@ def plotly_fig():
 
     st.write("**My Code**")
     code = '''
-    avg_distance_per_year = df.groupby('Year')['Distance from Tokyo Station'].mean().reset_index()
-    avg_distance_per_year.columns = ['Year', 'Average Distance']
+    # Customize the colors
+    custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
 
-    # Create a line chart using Vega-Lite
-    chart = {
-        "data": {
-            "values": avg_distance_per_year.to_dict(orient="records")
-        },
-        "mark": {
-            "type":"line",
-            "color": "#c18489"
-        },
-        "encoding": {
-            "x": {"field": "Year", "type": "temporal", "title": "Year"},
-            "y": {"field": "Average Distance", "type": "quantitative", "title": "Average Distance (km)"},
-            "tooltip": [{"field": "Year", "type": "temporal"}, {"field": "Average Distance", "type": "quantitative"}]
-        },
-        "title": "Average Distance from Tokyo Station by Year"
-    }
+    prefecture_counts = df['Prefecture'].value_counts().reset_index()
+    prefecture_counts.columns = ['Prefecture', 'Number of Stations']
+
+    
+    # Map each prefecture to a custom color
+    prefecture_list = prefecture_counts['Prefecture'].unique()
+    color_map = {prefecture: custom_colors[i % len(custom_colors)] for i, prefecture in enumerate(prefecture_list)}
+    
+    # Create a bar chart using Plotly
+    fig = px.bar(
+        prefecture_counts,
+        x='Prefecture',
+        y='Number of Stations',
+        color='Prefecture',
+        title='Number of Shinkansen Stations by Prefecture',
+        labels={'Prefecture': 'Prefecture', 'Number of Stations': 'Number of Stations'},
+        height=600,
+        color_discrete_map=color_map  # Apply the custom colors
+    )
+
+    # Customize the layout for better readability
+    fig.update_layout(
+        xaxis_title='Prefecture',
+        yaxis_title='Number of Stations',
+        xaxis={'categoryorder':'total descending'}
+    )
 
     # Display the chart in Streamlit
-    st.vega_lite_chart(chart, use_container_width=True)'''
+    st.plotly_chart(fig, use_container_width=True)'''
     st.code(code, language="python")
 
 def bokeh_fig():
@@ -536,13 +546,6 @@ def bokeh_fig():
     p.line(x='Year', y='Number of Stations', source=source, line_width=2, color='blue', legend_label='Stations')
     p.circle(x='Year', y='Number of Stations', source=source, size=8, color='red', legend_label='Stations')
 
-    # Add hover tool for more interactivity
-    hover = HoverTool()
-    hover.tooltips = [
-        ("Year", "@Year"),
-        ("Number of Stations", "@{Number of Stations}")
-    ]
-    p.add_tools(hover)
 
     # Customize the chart
     p.legend.location = "top_left"
