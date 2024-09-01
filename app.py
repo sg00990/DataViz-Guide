@@ -811,7 +811,6 @@ elif page == "Advanced Charts":
 else:
     st.header("**Shinkansen in Japan 🚅**")
     st.markdown("---")
-    st.write('######')
 
     col1, col2, col3 = st.columns([1.5, 4.5, 2], gap='medium')
 
