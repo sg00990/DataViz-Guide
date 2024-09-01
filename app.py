@@ -61,7 +61,7 @@ def area_chart():
 def bar_chart():
     st.subheader("*Number of Stations Per Prefecture*")
     stations_per_prefecture = df['Prefecture'].value_counts()
-    st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#6298c0")
+    st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#c18489")
 
     st.write("**Function Signature**")
     code = '''st.bar_chart(data=None, *, x=None, y=None, x_label=None, y_label=None, color=None, horizontal=False, stack=None, width=None, height=None, use_container_width=True)'''
@@ -94,7 +94,7 @@ def bar_chart():
     st.write("**My Code**")
     code = '''
     stations_per_prefecture = df['Prefecture'].value_counts()
-    st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#6298c0")'''
+    st.bar_chart(stations_per_prefecture, x_label="Prefecture", y_label="Number of Stations", color="#c18489")'''
     st.code(code, language="python")
 
 def line_chart():
