@@ -287,7 +287,7 @@ def altair_fig():
     color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
     
     # Create a bar chart using Altair
-    chart = alt.Chart(company_counts).mark_bar().encode(
+    chart = alt.Chart(df).mark_bar().encode(
         x=alt.X('Company:N', sort='-y', title='Company'),
         y=alt.Y('Number of Stations:Q', title='Number of Stations'),
         color=alt.Color('Company:N', scale=color_scale),
@@ -335,7 +335,7 @@ def altair_fig():
         color_scale = alt.Scale(domain=list(color_map.keys()), range=list(color_map.values()))
         
         # Create a bar chart using Altair
-        chart = alt.Chart(company_counts).mark_bar().encode(
+        chart = alt.Chart(df).mark_bar().encode(
             x=alt.X('Company:N', sort='-y', title='Company'),
             y=alt.Y('Number of Stations:Q', title='Number of Stations'),
             color=alt.Color('Company:N', scale=color_scale),
