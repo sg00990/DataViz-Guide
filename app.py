@@ -251,7 +251,29 @@ def matplotlib_fig():
 
     st.write("**My Code**")
     code = '''
-    st.map(df, longitude="Longitude", latitude="Latitude", color="#87bbe2")'''
+        custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
+        shinkansen_lines = df['Shinkansen_Line'].unique()
+        color_map = {line: custom_colors[i % len(custom_colors)] for i, line in enumerate(shinkansen_lines)}
+    
+    
+        # Create a scatter plot
+        plt.figure(figsize=(6, 4))
+        for line in shinkansen_lines:
+            subset = df[df['Shinkansen_Line'] == line]
+            plt.scatter(
+                subset['Longitude'], subset['Latitude'], 
+                alpha=0.7, label=line, 
+                edgecolors='w', s=30, 
+                c=color_map[line]
+            )
+    
+        plt.title('Shinkansen Stations in Japan')
+        plt.xlabel('Longitude')
+        plt.ylabel('Latitude')
+        plt.grid(True)
+    
+        # Display the plot in Streamlit
+        st.pyplot(plt)'''
     st.code(code, language="python")
 
 def altair_fig():
