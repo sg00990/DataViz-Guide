@@ -280,7 +280,7 @@ def matplotlib_fig():
 def altair_fig():
     # Customize the colors
     custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
-    company_list = company_counts['Company'].unique()
+    company_list = df['Company'].unique()
     color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
     
     # Convert the color map to a scale for Altair
@@ -328,7 +328,7 @@ def altair_fig():
     code = '''
         # Customize the colors
         custom_colors = ['#c18489', '#e3a8b3', '#87bbe2', '#c7daed', '#6298c0']
-        company_list = company_counts['Company'].unique()
+        company_list = df['Company'].unique()
         color_map = {company: custom_colors[i % len(custom_colors)] for i, company in enumerate(company_list)}
         
         # Convert the color map to a scale for Altair
