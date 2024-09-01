@@ -4,7 +4,7 @@ streamlit_navigation_bar
 matplotlib
 altair
 plotly
-bokeh==2.4.3
+bokeh<=2.4.3
 pillow
 pydeck
 openpyxl
