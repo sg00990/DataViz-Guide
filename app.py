@@ -785,8 +785,6 @@ elif page == "Advanced Charts":
         vega_fig()
     elif choice == 'Plotly':
         plotly_fig()
-    elif choice == 'Bokeh':
-        bokeh_fig()
     elif choice == 'Pydeck':
         pydeck_fig()
     elif choice == "Graphviz":
