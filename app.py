@@ -828,6 +828,11 @@ elif page == "Advanced Charts":
 elif page == "Other":
     st.subheader("Honorable Mentions")
     st.write("*A brief overview of other Streamlit widgets that can be utilized for data visualization*")
+    col1, col2 = st.columns(2)
+
+    with col1.expander("**Text Widgets**", expanded=True):
+        st.title("This is a title.")
+        st.code('''st.title("This is a title.")''', language="Python")
 
 else:
     st.header("**Shinkansen in Japan 🚅**")
