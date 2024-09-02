@@ -841,14 +841,20 @@ elif page == "Other":
         st.code('''st.subheader("This is a subheader.")''', language="Python")
 
     with col2.expander("**Data Widgets**", expanded=True):
-        d = {'Song': ["Tear", "Paranoia"], 'Artist': ["BTS", "KANGDANIEL"]}
+        d = {'Song': ["Tear", "Paranoia", "Move"], 'Artist': ["BTS", "KANGDANIEL", "Taemin"]}
         song_df = pd.DataFrame(d)
-        st.dataframe(song_df)
-        st.code('''st.dataframe(song_df)''', language="python")
+        st.dataframe(song_df, hide_index=True)
+        st.code('''st.dataframe(song_df, hide_index=True)''', language="python")
+
+        st.table(song_df)
+        st.code('''st.table(song_df)''', language="python")
 
         song_df['Favorite?'] = False
-        st.data_editor(song_df)
-        st.code('''st.data_editor(song_df)''', language="python")
+        st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)
+        st.code('''st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)''', language="python")
+
+        st.metric("Songs in Playlist", 774, 2)
+        st.code('''st.metric("Songs in Playlist", 774, 2)''', language="python")
 
 
 else:
