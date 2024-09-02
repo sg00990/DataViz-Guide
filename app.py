@@ -52,7 +52,7 @@ def area_chart():
 
     st.write("**My Code**")
     code = '''
-    # Group the number of station by year
+    # Group the number of stations by year
     stations_per_year = df.groupby('Year').size()
 
     # Display Streamlit chart
@@ -134,7 +134,7 @@ def line_chart():
 
     st.write("**My Code**")
     code = '''
-    # Group the number of station by year
+    # Group the number of stations by year
     stations_per_year = df.groupby('Year').size()
 
     # Display Streamlit chart
