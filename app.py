@@ -849,10 +849,14 @@ elif page == "Other":
         st.code('''st.dataframe(song_df, hide_index=True)''', language="python")
         st.divider()
 
-        st.table(song_df)
-        st.code('''st.table(song_df)''', language="python")
+        d = {'Show': ["Teen Wolf", "The Walking Dead", "Percy Jackson"], 'Release Year': [2011, 2010, 2024]}
+        tv_df = pd.DataFrame(d)
+        st.table(tv_df)
+        st.code('''st.table(tv_df)''', language="python")
         st.divider()
 
+        d = {'Japanese Artist': ["Chanmina", "Fujii Kaze", "ATARASHII GAKKO!"], 'Song': ["Harenchi", "Shinunoga E-Wa", "Otonablue"]}
+        song_df = pd.DataFrame(d)
         song_df['Favorite?'] = False
         st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)
         st.code('''st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)''', language="python")
