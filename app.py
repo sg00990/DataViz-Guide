@@ -887,8 +887,12 @@ elif page == "Other":
         bday = st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")
         if bday is not None:
             st.balloons()
-        st.code('''bday = st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")''', language="python")
+        st.code('''st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")''', language="python")
+
+    with col2.expander("**Media Elements**", expanded=True)
+        st.code('''st.image("your_image.jpg")''', language="python")
         st.divider()
+        st.code('''st.logo(your_logo)''', language="python")
         
 
 
