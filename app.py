@@ -723,7 +723,7 @@ styles = {
     }
 }
 
-page = st_navbar(["Demo Dashboard", "Simple Charts", "Advanced Charts"], styles=styles)
+page = st_navbar(["Demo Dashboard", "Simple Charts", "Advanced Charts", "Other"], styles=styles)
 
 if page == "Simple Charts":
     st.header('Streamlit Data Viz Guide')
@@ -824,6 +824,10 @@ elif page == "Advanced Charts":
         st.subheader("My Data")
         st.write("My dataset is a Japanese bullet train (shinkansen) dataset from Kaggle and I used pandas to import/manipulate it.")
         st.code('''df = pd.read_excel("shinkansen.xlsx")''', language="python")
+
+elif page == "Other":
+    st.subheader("Honorable Mentions")
+    st.write("*A brief overview of other Streamlit widgets that can be utilized for data visualization*")
 
 else:
     st.header("**Shinkansen in Japan 🚅**")
