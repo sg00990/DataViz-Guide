@@ -827,34 +827,69 @@ elif page == "Advanced Charts":
 
 elif page == "Other":
     st.subheader("Honorable Mentions")
-    st.write("*A brief overview of other Streamlit widgets that can be utilized for data visualization*")
+    st.write("*A brief overview of other Streamlit widgets and elements that can be utilized for data visualization*")
     col1, col2 = st.columns(2)
 
-    with col1.expander("**Text Widgets**", expanded=True):
+    with col1.expander("**Text Elements**", expanded=True):
         st.title("This is a title.")
         st.code('''st.title("This is a title.")''', language="Python")
+        st.divider()
 
         st.header("This is a header.")
         st.code('''st.header("This is a header.")''', language="Python")
+        st.divider()
 
         st.subheader("This is a subheader.")
         st.code('''st.subheader("This is a subheader.")''', language="Python")
 
-    with col2.expander("**Data Widgets**", expanded=True):
+    with col2.expander("**Data Elements**", expanded=True):
         d = {'Song': ["Tear", "Paranoia", "Move"], 'Artist': ["BTS", "KANGDANIEL", "Taemin"]}
         song_df = pd.DataFrame(d)
         st.dataframe(song_df, hide_index=True)
         st.code('''st.dataframe(song_df, hide_index=True)''', language="python")
+        st.divider()
 
         st.table(song_df)
         st.code('''st.table(song_df)''', language="python")
+        st.divider()
 
         song_df['Favorite?'] = False
         st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)
         st.code('''st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)''', language="python")
+        st.divider()
 
         st.metric("Songs in Playlist", 774, 2)
         st.code('''st.metric("Songs in Playlist", 774, 2)''', language="python")
+
+    with col1.expander("**Input Widgets**", expanded=True):
+        on = st.toggle("Click me if you dare!")
+        if on:
+            st.toast()
+        st.code('''st.toggle("Click me if you dare!")''', language="python")
+        st.divider()
+
+        st.radio("Choose a game:", options=["Animal Crossing", "Mario Kart", "Kirby"])
+        st.code('''st.radio("Choose a game:", options=["Animal Crossing", "Mario Kart", "Kirby"])''', language="python")
+        st.divider()
+
+        st.selectbox("Select a movie", options=["Zombieland", "White Chicks", "Spirited Away"])
+        st.code('''st.selectbox("Select a movie", options=["Zombieland", "White Chicks", "Spirited Away"])''', language="python")
+        st.divider()
+
+        st.multiselect("Choose all pets that apply", options=["Cat", "Dog", "Fish", "Hamster", "Other"])
+        st.code('''st.multiselect("Choose all pets that apply", options=["Cat", "Dog", "Fish", "Hamster", "Other"])''', language="python")
+        st.divider()
+
+        st.slider('Pick a rating',1, 5)
+        st.code('''st.slider('Pick a rating', 1, 5)''', language="python")
+        st.divider()
+
+        bday = st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")
+        if bday is not None:
+            st.balloons()
+        st.code('''bday = st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")''', language="python")
+        st.divider()
+        
 
 
 else:
