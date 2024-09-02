@@ -834,6 +834,13 @@ elif page == "Other":
         st.title("This is a title.")
         st.code('''st.title("This is a title.")''', language="Python")
 
+        st.header("This is a header.")
+        st.code('''st.header("This is a header.")''', language="Python")
+
+        st.subheader("This is a subheader.")
+        st.code('''st.subheader("This is a subheader.")''', language="Python")
+
+
 else:
     st.header("**Shinkansen in Japan 🚅**")
     st.markdown("---")
