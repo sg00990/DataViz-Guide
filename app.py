@@ -889,7 +889,7 @@ elif page == "Other":
             st.balloons()
         st.code('''st.date_input('Select your birthday', value=None, format="MM/DD/YYYY")''', language="python")
 
-    with col2.expander("**Media Elements**", expanded=True)
+    with col2.expander("**Media Elements**", expanded=True):
         st.code('''st.image("your_image.jpg")''', language="python")
         st.divider()
         st.code('''st.logo(your_logo)''', language="python")
