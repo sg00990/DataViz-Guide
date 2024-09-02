@@ -859,7 +859,7 @@ elif page == "Other":
         song_df = pd.DataFrame(d)
         song_df['Favorite?'] = False
         st.data_editor(song_df, disabled=['Song', 'Japanese Artist'], hide_index=True)
-        st.code('''st.data_editor(song_df, disabled=['Song', 'Artist'], hide_index=True)''', language="python")
+        st.code('''st.data_editor(song_df, disabled=['Song', 'Japanese Artist'], hide_index=True)''', language="python")
         st.divider()
 
         st.metric("Songs in Playlist", 774, 2)
