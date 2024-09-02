@@ -742,7 +742,7 @@ if page == "Simple Charts":
         map()
     else:
         st.subheader("Pros and Cons of Simple Charts")
-        st.write('''*"Simple charts" are just data visualization tools native to Streamlit.*''')
+        st.write('''*"Simple charts" are data visualization tools native to Streamlit.*''')
         st.markdown(
             """
             **Pros**:
@@ -793,7 +793,7 @@ elif page == "Advanced Charts":
         graphviz_fig()
     else:
         st.subheader("Pros and Cons of Advanced Charts")
-        st.write('''*"Advanced charts" are just data visualization tools from other Python packages/libraries such as Matplotlib or Plotly.*''')
+        st.write('''*"Advanced charts" are data visualization tools from other Python packages/libraries such as Matplotlib or Plotly.*''')
         st.markdown(
             """
             **Pros**:
