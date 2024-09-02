@@ -840,6 +840,16 @@ elif page == "Other":
         st.subheader("This is a subheader.")
         st.code('''st.subheader("This is a subheader.")''', language="Python")
 
+    with col2.expander("**Data Widgets**", expanded=True):
+        d = {'Song': ["Tear", "Paranoia"], 'Artist': ["BTS", "KANGDANIEL"]}
+        song_df = pd.DataFrame(d)
+        st.dataframe(song_df)
+        st.code('''st.dataframe(song_df)''', language="python")
+
+        song_df['Favorite?'] = False
+        st.data_editor(song_df)
+        st.code('''st.data_editor(song_df)''', language="python")
+
 
 else:
     st.header("**Shinkansen in Japan 🚅**")
