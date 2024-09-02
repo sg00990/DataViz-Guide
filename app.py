@@ -864,7 +864,7 @@ elif page == "Other":
     with col1.expander("**Input Widgets**", expanded=True):
         on = st.toggle("Click me if you dare!")
         if on:
-            st.toast()
+            st.toast("Wow, I never saw that coming.", icon="😝")
         st.code('''st.toggle("Click me if you dare!")''', language="python")
         st.divider()
 
