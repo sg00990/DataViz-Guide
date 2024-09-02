@@ -774,7 +774,7 @@ if page == "Simple Charts":
 
 elif page == "Advanced Charts":
     st.header('Streamlit Data Viz Guide')
-    choice = st.selectbox('Choose a chart type', options=['Matplotlib', 'Altair', 'Vega Lite', 'Plotly', 'Bokeh', 'Pydeck', 'Graphviz'], index=None, key=2)
+    choice = st.selectbox('Choose a chart type', options=['Matplotlib', 'Altair', 'Vega Lite', 'Plotly', 'Pydeck', 'Graphviz'], index=None, key=2)
     st.write('###')
 
     if choice == "Matplotlib":
