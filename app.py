@@ -719,7 +719,7 @@ def graphviz_fig():
 
 styles = {
     "nav": {
-        "background-color": "rgb(227, 168, 179)",
+        "background-color": "rgb(254, 193, 204)",
     }
 }
 
