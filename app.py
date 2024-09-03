@@ -991,6 +991,7 @@ else:
 
     col3.subheader("*Stations Per Year*")
     stations_per_year = df.groupby('Year').size()
+    st.dataframe(stations_per_year.style.format(thousands=''))
     col3.line_chart(stations_per_year, x_label="Year Opened", y_label="Number of Stations", color="#6298c0")
 
     col2.image('train2.png', use_column_width=True)
